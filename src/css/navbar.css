@@ -73,3 +73,91 @@
 .home-navbar div.hover-line:after {
     transform-origin: 0% 50%;
 }
+
+.home-navbar .navbar-container .header-frame {
+    margin-top: 142px;
+    height: 462px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.home-navbar .navbar-container .header-frame .detail {
+    width: 510px;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-navbar .navbar-container .header-frame .detail .head-main-txt{
+    width: 450px;
+    height: 150px;
+    font-family: "Roboto Serif";
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.75px;
+    color: #F8F8FF;
+}
+
+.home-navbar .navbar-container .header-frame .detail .wel-txt{
+    width: 510px;
+    height: 42px;
+    font-family: "Roboto Serif";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.54px;
+    color: #D7B686;
+}
+
+.home-navbar .navbar-container .header-frame .detail .service-txt{
+    margin-top:23px ;
+    width: 153px;
+    height: 23px;
+    font-family: "Roboto Serif";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.3px;
+    color: #D5D5D5;
+}
+
+.home-navbar .navbar-container .detail .signup {
+    margin-top: 73px ;
+}
+
+.home-navbar .navbar-container .detail .signup .signup-button {
+    width: 210px;
+    height: 60px;
+    border-radius: 4px;
+    background: #1976D2;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: #F8F8FF;
+
+}
+
+
+.home-navbar .navbar-container .logo-frame  {
+    margin-top: 43px;
+    width: 690px;
+    height: 419px;
+}
+
+.home-navbar .navbar-container .logo-frame .logo-img  {
+    width:100%;
+    height: 100%;
+    background: url("/public/img/logo.webp");
+    background-size: contain;
+    background-repeat:no-repeat ;
+    filter: invert(25%);
+
+}
