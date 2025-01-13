@@ -1,7 +1,8 @@
 import { Box, Button, Container, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import Basket from "./Basket";
 
-export function OtherNavbar() {
+export default function OtherNavbar() {
     const authMember = null; // Replace with actual authentication logic
     return(
         <div className="other-navbar">
@@ -37,13 +38,16 @@ export function OtherNavbar() {
                     <NavLink to="/help" activeClassName={"underline"}>Help</NavLink>
                 </Box> 
                 { /* BASKET */ }
+
+                <Basket />
+                
                 {!authMember ? (
                     <Box>
                         <Button variant='contained' className='login-button' >Login</Button>
                     </Box>
                 ) : (
                     <img 
-                        alt='Profile-picture' 
+                        alt='user-avatar' 
                         className='user-avatar'
                         src={"/icons/default-user.svg"}
                         aria-haspopup={"true"}
