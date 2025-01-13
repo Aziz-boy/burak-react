@@ -9,40 +9,39 @@
 .home-navbar .navbar-container {
     margin-top: 55px;
     height: 642px;
-
 }
 
 .home-navbar .navbar-container .menu {
     height: 50px;
-    display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
-.home-navbar .navbar-container .menu .brand-logo {
+.home-navbar .navbar-container .brand-logo {
     width: 125px;
     height: 30px;
 }
 
-.home-navbar .navbar-container .menu .links{
+.home-navbar .navbar-container .menu .links {
     min-width: 700px;
-    display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-direction: row;
     align-items: center;
+    display: flex;
 }
 
-.home-navbar .navbar-container .menu .links .login-button{
-    background:"#3776CC" ;
-    color: "#f8f8ff";
+.home-navbar .navbar-container .menu .links .login-button {
+    background: #3776CC;
+    color: #f8f8ff;
 }
 
-.home-navbar .navbar-container .menu .user-avatar{
+.home-navbar .navbar-container .menu .user-avatar {
     width: 50px;
     height: 50px;
-    border-radius: 24px
+    border-radius: 24px;
 }
+
 
 .home-navbar a {
     text-decoration: none;
@@ -53,7 +52,7 @@
     z-index: 100;
 }
 
-.home-navbar .undeline {
+.home-navbar .underline {
     display: block;
     content: "";
     border-bottom:solid 2px #dfb686;
