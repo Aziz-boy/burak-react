@@ -9,7 +9,7 @@ import AspectRatio from "@mui/joy/AspectRatio";
 const activeUsers = [
   { memberNick: "Martin", imagePath: "/img/martin.webp" },
   { memberNick: "Justin", imagePath: "/img/justin.webp" },
-  { memberNick: "Rose",   imagePath: "/img/rose.webp" },
+  { memberNick: "Rose", imagePath: "/img/rose.webp" },
   { memberNick: "Nusret", imagePath: "/img/nusret.webp" },
 ];
 
@@ -33,7 +33,7 @@ export default function ActiveUsers() {
 
                       <CardOverflow variant="soft" className="product-detail">
                         <Stack className="info">
-                          <Stack flexDirection={"row"} >
+                          <Stack flexDirection={"row"}>
                             <Typography className={"member-nickname"}>
                               {ele.memberNick}
                             </Typography>
