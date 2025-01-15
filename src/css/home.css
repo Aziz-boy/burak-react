@@ -252,3 +252,90 @@
     transform: scale(1.5);
     overflow: hidden;
 }
+
+/** ACTIVE USERS **/
+
+.homepage .active-users-frame {
+    width: 100%;
+    height: 605px;
+    display: flex;
+    background: #F8F8FF;
+}
+
+.homepage .main {
+    margin-top: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.homepage .active-users-frame .category-title {
+    font-family: "Dancing Script";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 43px;
+}
+
+.homepage .active-users-frame .main .cards-frame {
+    width:100%;
+    margin: 47px 2px 2px 2px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.homepage .active-users-frame .main .card {
+    height:319px;
+    width:305px;
+    cursor: pointer;
+}
+
+
+
+.homepage .active-users-frame .product-detail {
+    width: auto;
+    height: 212px;
+    display: flex;
+    justify-content: center;
+    margin-top: -12px;
+    border-top:1px solid;
+    border-color: #FFF;
+    background-color: #FFF;
+
+}
+
+
+.homepage .active-users-frame .product-detail .info {
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFF;
+}
+
+.homepage .active-users-frame .product-detail .member-nickname {
+    color: #000;
+    text-align: center;
+    font-family: "Roboto Serif";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 10px;
+
+}
+
+.homepage .active-users-frame .no-data {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: capitalize;
+    font-family: "Poppins";
+    font-style:normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 34px;
+    color: #e3c09d;
+}
