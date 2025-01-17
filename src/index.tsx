@@ -15,6 +15,7 @@ if (!container) throw new Error("Root container is missing in index.html");
 
 const root = ReactDOM.createRoot(container); // Create a root
 
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>

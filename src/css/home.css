@@ -291,24 +291,21 @@
 .homepage .active-users-frame .product-detail {
   width: auto;
   height: 212px;
-  display: flex;
-  justify-content: center;
   margin-top: -12px;
-  border-top: 1px solid;
-  border-color: #fff;
+  border-bottom: 1px solid;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  border-color: #b7b7b7;
   background-color: #fff;
+  align-items: center;
 }
 
-.homepage .active-users-frame .product-detail .info {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-}
+
 
 .homepage .active-users-frame .product-detail .member-nickname {
   color: #000;
+  display: flex;
+  justify-content: center;
   text-align: center;
   font-family: "Roboto Serif";
   font-size: 17px;

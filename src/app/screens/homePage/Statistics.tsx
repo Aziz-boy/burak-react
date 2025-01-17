@@ -6,7 +6,7 @@ export default function Statistics() {
     <div className={"static-frame"}>
       <Container>
         <Stack className={"info"}>
-          <Stack className={"static-box"}>
+          <Stack className={"static-box"}> 
             <Box className={"static-num"}>12</Box>
             <Box className={"static-txt"}>Restaurants</Box>
           </Stack>
