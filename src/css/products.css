@@ -1,0 +1,306 @@
+.products-page {
+  position: relative;
+  width: 100%;
+  height: auto;
+  background: #f8f8ff;
+}
+
+/** Products **/
+
+.products-page .products {
+  width: 100%;
+  height: auto;
+  display: flex;
+  background: #f8f8ff;
+  display: flex;
+  flex-direction: column;
+  margin-top: 80px;
+}
+
+.products-page .products .avatar-big-box {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.products-page .products .avatar-big-box .category-title {
+  color: #343434;
+  font-family: "Roboto Serif";
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-left: 460px;
+}
+
+.products-page .products .avatar-big-box .input-box .search-input .input-field {
+  border-radius: 18.5px;
+  border: 1px solid #fff;
+  background: #fffcfc;
+  box-shadow: 0px 4px 4px 0px rgba(212, 212, 212, 0.25);
+  width: 360px;
+  height: 28.541px;
+  flex-shrink: 0;
+  border: none;
+}
+
+.products-page .products .avatar-big-box .input-box .search-button button {
+  border-radius: 18.5px;
+  width: 106px;
+  height: 32px;
+  margin-left: -80px;
+  flex-shrink: 0;
+}
+
+.products-page
+  .products
+  .avatar-big-box
+  .input-box
+  .search-button
+  .search-icon {
+  width: 21px;
+  height: 23px;
+  flex-shrink: 0;
+  padding-left: 5px;
+}
+
+.products-page .products .avatar-big-box .input-box {
+  display: flex;
+  flex-direction: row;
+}
+
+.products-page .products .dishes-filter-section {
+  display: flex;
+  flex-direction: row;
+  margin-top: 71.73px;
+  margin-bottom: 40.5px;
+  margin-left: 1020px;
+}
+
+.products-page .products .dishes-filter-section .filter-button {
+  border-radius: 8px;
+  width: 70px;
+  height: 36.5px;
+  flex-shrink: 0;
+  margin-right: 20px;
+}
+
+.products-page .products .list-category-section {
+  display: flex;
+  flex-direction: row;
+  width: 105%;
+  align-items: flex-start;
+}
+
+.products-page .products .list-category-section .product-category button {
+  width: 55px;
+  height: 36px;
+  transform: rotate(-90deg);
+  flex-shrink: 0;
+  margin-top: 40px;
+}
+
+/**  PRODUCT WRAPPER **/
+
+.products-page .products .list-category-section .product-wrapper {
+  margin-left: 25px;
+  flex-wrap: wrap;
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 20px;
+}
+
+.products-page .products .list-category-section .product-wrapper .card {
+  height: 375px;
+  width: 290px;
+  cursor: pointer;
+  background-color: #f8f8ff;
+}
+
+.products-page .products .list-category-section .product-wrapper .card img {
+  border-radius: 0px 50px 0px 0px;
+}
+
+.products-page .products .list-category-section .product-wrapper .product-sale {
+  position: absolute;
+  margin-top: 10px;
+  z-index: 100;
+  width: 90px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ff9200;
+  box-shadow: 4px 6px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 21px;
+}
+
+.products-page
+  .products
+  .list-category-section
+  .product-wrapper
+  .product-detail {
+  width: auto;
+  height: 49%;
+  display: flex;
+  justify-content: center;
+  margin-top: -12px;
+  background-color: #f8f8ff;
+}
+
+.products-page
+  .products
+  .list-category-section
+  .product-wrapper
+  .product-detail
+  .info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f8ff;
+  align-items: center;
+}
+
+.products-page
+  .products
+  .list-category-section
+  .product-wrapper
+  .product-detail
+  .title {
+  color: #343434;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-top: 16px;
+}
+
+.products-page
+  .products
+  .list-category-section
+  .product-wrapper
+  .product-detail
+  .price {
+  color: #e3c08d;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-top: 4px;
+}
+
+.products-page
+  .products
+  .list-category-section
+  .product-wrapper
+  .product-detail
+  .price
+  img {
+  border-radius: 20px;
+  background: lightgray 50% / cover no-repeat;
+  width: 32px;
+  height: 31px;
+  flex-shrink: 0;
+}
+
+.products-page
+  .products
+  .list-category-section
+  .product-wrapper
+  .product-detail
+  .views {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.products-page .products .list-category-section .product-wrapper .no-data {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 34px;
+  color: #e3c09d;
+}
+
+.products-page .products .pagination-section {
+  margin-top: 9px;
+  margin-bottom: 67px;
+  margin-left: 80px;
+}
+
+.products-page .products .brands-logo {
+    background: #0D1518;
+    width: 100%;
+    height: 630px;
+}
+.products-page .products .brands-logo .brands-title{
+    color: #E3C08D;
+    font-family: Roboto;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
+    margin-top: 84px;
+}
+
+.products-page .products .brands-logo .brands-cards {
+    width: 1293.903px;
+    height: 351px;
+    flex-shrink: 0;
+    margin-top: 58px;
+    display: flex;
+    flex-direction: row;
+    gap: 85.6px;
+
+}
+
+.products-page .products .brands-logo .brands-cards .brands-card { 
+    width: 258.78px;
+    height: 350px;
+    flex-shrink: 0;
+    border-radius: 16px;
+    border-radius: 20px;
+    background: #0D1518;
+    box-shadow: 0px 0px 22px 0px #E4D4D4;
+    
+}
+
+.products-page .products .brands-logo .brands-cards .brands-card img { 
+    padding:10px ;
+}
+
+
+.products-page .products .address .address-area .address-title {
+    color: #343434;
+    font-family: "Roboto Serif";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-align: center;
+    margin-top: 47px;
+}
+
+.products-page .products .address .address-area iframe {
+    width: 1300px;
+    height: 567.036px;
+    flex-shrink: 0;
+    margin-bottom: 89px;
+}

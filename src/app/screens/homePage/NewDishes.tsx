@@ -22,7 +22,7 @@ export default function NewDishes() {
         <Stack className="main">
           <Box className="category-title">Fresh Menu</Box>
           <Stack className="cards-frame">
-            <CssVarsProvider >
+            <CssVarsProvider>
               {newDishes.length !== 0 ? (
                 newDishes.map((ele, index) => {
                   return (
@@ -51,7 +51,7 @@ export default function NewDishes() {
                               />
                             </Typography>
                           </Stack>
-                        </Stack>    
+                        </Stack>
                       </CardOverflow>
                     </Card>
                   );
