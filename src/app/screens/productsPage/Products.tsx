@@ -9,7 +9,7 @@ import PaginationItem from "@mui/material/PaginationItem";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import Divider from "../../components/divider";
+import ShoppingCartSharpIcon from "@mui/icons-material/ShoppingCartSharp";
 import AspectRatio from "@mui/joy/AspectRatio";
 import Card from "@mui/joy/Card";
 import CardOverflow from "@mui/joy/CardOverflow";
@@ -118,6 +118,42 @@ export default function Products() {
                           <AspectRatio ratio="1">
                             <img src={ele.imagePath} alt="" />
                           </AspectRatio>
+
+                          {/* Hover Effect Container */}
+                          <div className="hover-icons">
+                            <button
+                              className="icon-button"
+                              style={{
+                                width: "64px", // Set equal width
+                                height: "46px", // Set equal height
+                                display: "flex", // Center content
+                                alignItems: "center",
+                                justifyContent: "center",
+                                backgroundColor: "transparent", // Optional: Add background color
+                                borderRadius: "10px",
+                                border: "1px solid #E3C08D",
+                                background: "rgba(187, 47, 200, 0.78)",
+                              }}
+                            >
+                              <ShoppingCartSharpIcon className="shopping-cart-icon" />
+                            </button>
+                            <button
+                              className="icon-button"
+                              style={{
+                                width: "40px", // Set equal width
+                                height: "40px", // Set equal height
+                                borderRadius: "50%", // Make it round
+                                display: "flex", // Center content
+                                alignItems: "center",
+                                justifyContent: "center",
+                                backgroundColor: "transparent", // Optional: Add background color
+                                border: "1px solid rgba(0, 0, 0, 0.40)",
+                              }}
+                            >
+                                <RemoveRedEyeIcon className="removed-eye-icon" />
+                              
+                            </button>
+                          </div>
                         </CardOverflow>
 
                         <CardOverflow variant="soft" className="product-detail">
@@ -127,7 +163,8 @@ export default function Products() {
                                 {ele.productName}
                               </Typography>
                               <Typography className={"price"}>
-                                <img src="./icons/dollar_sign.svg" alt="" /> 15
+                                <MonetizationOnIcon className="monetization-icon" />{" "}
+                                15
                               </Typography>
                               {/* Savatchani hover holida qo'shish kerak  */}
                             </Stack>

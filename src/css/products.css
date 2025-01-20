@@ -143,6 +143,56 @@
   font-size: 12px;
   line-height: 21px;
 }
+/** Hover Effect Container **/
+
+.products-page .products .list-category-section .product-wrapper .card .hover-icons .removed-eye-icon {
+  width: 24px;
+  height: 18.41px;
+  color: white;
+}
+
+.products-page .products .list-category-section .product-wrapper .card .hover-icons .shopping-cart-icon {
+  width: 50.588px;
+  height: 16.67px;
+  color: white;
+}
+
+.products-page .products .list-category-section .product-wrapper .card .hover-icons {
+  width: 140px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 225px;
+  right: 0 ;
+  bottom: 0;
+  left: 120px;
+  opacity: 0; /* Initially hide the icons */
+  transition: opacity 0.6s ease; /* Smooth transition for icons */
+}
+
+/* Apply background color on hover */
+.products-page .products .list-category-section .product-wrapper .card:hover {
+  background-color: rgba(0, 0, 0, 0.5); /* Background color on hover */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+/* Show the hover icons when the card is hovered */
+.products-page .products .list-category-section .product-wrapper .card:hover .hover-icons {
+  opacity: 1; /* Make the icons visible */
+}
+
+/* Maintain visibility when mouse is over the icons */
+.products-page .products .list-category-section .product-wrapper .card .hover-icons:hover {
+  opacity: 1; /* Keep the icons visible when hovering over them */
+}
+
+/* Smooth transition for each icon inside hover-icons */
+.products-page .products .list-category-section .product-wrapper .card .hover-icons .icon-button {
+  transition: opacity 0.3s ease; /* Smooth transition for each icon */
+}
+
+
 
 .products-page
   .products
@@ -204,9 +254,10 @@
   .product-wrapper
   .product-detail
   .price
-  img {
+  .monetization-icon {
   border-radius: 20px;
-  background: lightgray 50% / cover no-repeat;
+  background: 50% / cover no-repeat;
+  color: #eea51f;
   width: 32px;
   height: 31px;
   flex-shrink: 0;
@@ -304,6 +355,7 @@
     flex-shrink: 0;
     margin-bottom: 89px;
 }
+
 
 /** ChosenProduct **/
 
