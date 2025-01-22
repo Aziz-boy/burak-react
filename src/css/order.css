@@ -199,13 +199,9 @@
   .member-box
   .order-user-img {
   position: relative;
-  width: 117px;
-  height: 112px;
-  border-radius: 37px;
-  background: lightgray 50% / cover no-repeat;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  background-size: cover;
-  background-position: center;
+  display: flex;
+  flex-direction:column;
+  align-items: center;
 }
 .order-page
   .order-container
@@ -213,9 +209,10 @@
   .order-info-box
   .member-box
   .order-user-avatar {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 150px;
+  height: 150px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 37px;
 }
 .order-page
   .order-container
@@ -224,26 +221,17 @@
   .member-box
   .order-user-icon-box {
   position: absolute;
-  width: 30px;
-  height: 30px;
-  border-radius: 37px;
-  background: rgba(0, 0, 0, 0.33);
+  padding: 5px;
+  width: 37px;
+  height: 37px;
+  top: 81%;
+  right: 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  /* margin: 91px 0 0 88px; */
+  background: rgb(209 209 209 / 33%);
+  border-radius: 37px;
+
 }
-.order-page
-  .order-container
-  .order-right
-  .order-info-box
-  .member-box
-  .order-user-prof-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
+
 .order-page
   .order-container
   .order-right
