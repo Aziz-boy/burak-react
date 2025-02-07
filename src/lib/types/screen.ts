@@ -3,7 +3,7 @@
 import { Member } from "./member";
 import { Product } from "./product";
 
-export interface AppRouteState {
+export interface AppRootState {
     homePage: HomePageState;
     // productsPage: ProductsPageState;
 
