@@ -9,28 +9,48 @@ import CardOverflow from "@mui/joy/CardOverflow";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
-const list = [
-  { productName: "Lavash", imagePath: "/img/lavash.webp" },
-  { productName: "Cutlet", imagePath: "/img/cutlet.webp" },
-  { productName: "Kebab", imagePath: "/img/kebab.webp" },
-  { productName: "Kebab", imagePath: "/img/kebab-fresh.webp" },
-];
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrievePopularDishes } from "./selector";
+import { Product } from "../../../lib/types/product";
+import { serverApi } from "../../../lib/config";
+
+/** REDUX SLICE & SELECTOR**/
+const popularDishesRetriever = createSelector(
+  retrievePopularDishes,
+  (popularDishes) => ({ popularDishes })
+);
 
 export default function PopularDishes() {
+  const { popularDishes } = useSelector(popularDishesRetriever);
+  console.log("popularDishes:", popularDishes);
+
   return (
     <div className="popular-dishes-frame">
       <Container>
         <Stack className="popular-section">
           <Box className="category-title">Popular dishes</Box>
           <Stack className="cards-frame">
-            {list.length !== 0 ? (
-              list.map((ele, index) => {
+            {popularDishes.length !== 0 ? (
+              popularDishes.map((ele: Product) => {
+                const imagePath = `${serverApi}/${ele.productImages[0]}`;
                 return (
-                  <CssVarsProvider key={index}>
-                    <Card className="card">
-                      <CardCover>
-                        <img src={ele.imagePath} alt="" />
-                      </CardCover>
+                  <CssVarsProvider key={ele._id}>
+                    <Card
+                      className="card"
+                      sx={{ width: "300px", height: "400px" }}
+                    >
+                      {" "}
+                      {/* Fixed width and height for the card */}
+                      <CardCover
+                        sx={{
+                          backgroundImage: `url(${imagePath})`, // Set image as background
+                          backgroundSize: "cover", // This will ensure the image covers the entire area
+                          backgroundPosition: "center", // Center the image in the container
+                          backgroundRepeat: "no-repeat", // Prevent repeating the image
+                          height: "100%", // Make sure the card cover takes up the full height of the card
+                        }}
+                      />
                       <CardCover className={"card-cover"} />
                       <CardContent sx={{ justifyContent: "flex-end" }}>
                         <Stack
@@ -53,7 +73,7 @@ export default function PopularDishes() {
                               display: "flex",
                             }}
                           >
-                            20
+                            {ele.productViews}
                             <VisibilityIcon
                               sx={{ fontSize: 25, marginLeft: "5px" }}
                             />
@@ -67,15 +87,36 @@ export default function PopularDishes() {
                           py: 1.5,
                           px: 1.5,
                           borderTop: "1px solid",
-                          height: "60px",
+                          height: "80px",
                         }}
                       >
-                        <Typography
-                          startDecorator={<DescriptionOutlinedIcon />}
-                          textColor={"neutral.300"}
+                        <Box
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            flexDirection: "row",
+                          }}
                         >
-                          This is delicious meal
-                        </Typography>
+                          {/* Icon */}
+                          <DescriptionOutlinedIcon
+                            sx={{ marginRight: 1 }}
+                          />{" "}
+                          {/* Adjusts spacing between the icon and the text */}
+                          {/* Text Description */}
+                          <Typography
+                            textColor={"neutral.300"}
+                            sx={{
+                              display: "block", // Ensures the Typography behaves as a block element
+                              width: "274px", // Fixed width for the text container (where text should wrap)
+                              wordWrap: "break-word", // Allows words to break and continue on the next line
+                              whiteSpace: "normal", // Allow wrapping at the natural spaces in text
+                              overflow: "visible", // Make sure the overflow is visible (no hidden content)
+                              textOverflow: "clip", // Disable ellipsis for text that overflows
+                            }}
+                          >
+                            {ele.productDesc}
+                          </Typography>
+                        </Box>
                       </CardOverflow>
                     </Card>
                   </CssVarsProvider>

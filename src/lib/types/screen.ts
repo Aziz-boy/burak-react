@@ -14,7 +14,6 @@ export interface HomePageState {
     popularDishes: Product[];
     newDishes: Product[];
     topUsers: Member[];
-
 }
 
 
