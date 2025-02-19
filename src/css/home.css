@@ -2,7 +2,7 @@
   width: 100%;
   height: auto;
 }
-
+ 
 /** STATISTICS **/
 
 .homepage .static-frame {
@@ -121,9 +121,10 @@
 
 .homepage .new-products-frame {
   width: 100%;
-  height: 605px;
+  min-height: 605px; /* Allow it to grow if needed */
   display: flex;
   background: #f8f8ff;
+  padding: 20px 0;
 }
 
 .homepage .main {
@@ -131,33 +132,44 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .homepage .new-products-frame .category-title {
-  font-family: "Dancing Script";
-  font-style: normal;
+  font-family: "Roboto Serif";
   font-weight: 700;
   font-size: 36px;
   line-height: 43px;
+  text-align: center;
 }
 
-.homepage .new-products-frame .main .cards-frame {
+.homepage .new-products-frame .cards-frame {
   width: 100%;
-  margin: 47px 2px 2px 2px;
+  display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 20px; /* Adds spacing between cards */
+  margin-top: 47px;
+
+  
 }
 
-.homepage .new-products-frame .main .card {
-  height: 335px;
+.homepage .new-products-frame .card {
   width: 290px;
+  min-height: 335px;
+  display: flex;
   cursor: pointer;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .homepage .new-products-frame .product-sale {
   position: absolute;
   margin-top: 10px;
-  z-index: 100;
+  z-index: 10;
   width: 90px;
   height: 30px;
   display: flex;
@@ -166,26 +178,25 @@
   background: #ff9200;
   box-shadow: 4px 6px 20px rgba(0, 0, 0, 0.1);
   border-radius: 25px;
-  font-family: "Poppins";
-  font-style: normal;
+  font-family: "Poppins", sans-serif;
   font-weight: 600;
   font-size: 12px;
-  line-height: 21px;
   color: #f8f8ff;
 }
 
 .homepage .new-products-frame .product-detail {
-  width: auto;
-  height: 49%;
-  display: flex;
-  justify-content: center;
-  margin-top: -12px;
-  border-top: 1px solid;
-  border-color: #f8f8ff;
+  width: 100%;
+  padding: 10px;
+  border-top: 1px solid #f8f8ff;
   background-color: #fafbfb;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
 }
 
-.homepage .new-products-frame .product-detail {
+.homepage .new-products-frame .info {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -193,25 +204,21 @@
   align-items: center;
 }
 
-.homepage .new-products-frame .product-detail .info {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.homepage .new-products-frame .product-detail .title {
-  width: 65px;
+.homepage .new-products-frame .title {
   font-weight: 500;
+  width: 100%;
+  max-width: 250px;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
-.homepage .new-products-frame .product-detail .divider {
-  margin: 0 10px 0 10px;
+.homepage .new-products-frame .divider {
   width: 2px;
+  height: 24px;
+  background: #d9d9d9;
 }
 
-.homepage .new-products-frame .product-detail .views {
+.homepage .new-products-frame .views {
   display: flex;
   align-items: center;
   font-weight: 500;
@@ -224,13 +231,13 @@
   justify-content: center;
   align-items: center;
   text-transform: capitalize;
-  font-family: "Poppins";
-  font-style: normal;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 30px;
-  line-height: 34px;
   color: #e3c09d;
+  text-align: center;
 }
+
 
 /** ADVERTISEMENT **/
 

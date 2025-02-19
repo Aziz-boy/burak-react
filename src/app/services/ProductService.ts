@@ -7,7 +7,7 @@ class ProductService {
     this.path = serverApi;
   }
   public async getProducts(input: ProductInquiry): Promise<Product[]> {
-    try {
+    try { 
       let url = `${this.path}/product/all?order=${input.order}&page=${input.page}&limit=${input.limit}`;
       if (input.productCollection)
         url += `&productCollection=${input.productCollection}`;
