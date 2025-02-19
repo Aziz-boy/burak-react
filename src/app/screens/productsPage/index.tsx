@@ -14,7 +14,7 @@ export default function ProductPage() {
         <ChosenProduct/>
       </Route>
       <Route path={`${products.path}`}>
-        <Products />
+        <Products/>
       </Route>
     </Switch>
   </div>;

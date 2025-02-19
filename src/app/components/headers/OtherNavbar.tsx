@@ -22,7 +22,7 @@ export default function OtherNavbar() {
                     <NavLink to="/" >Home</NavLink>
                 </Box> 
                 <Box className={"hover-line"}>
-                    <NavLink to="/product" activeClassName={"underline"}>Products</NavLink>
+                    <NavLink to="/products" activeClassName={"underline"}>Products</NavLink>
                 </Box> 
                 { authMember ?  (
                 <Box className={"hover-line"}>

@@ -36,7 +36,7 @@ export default function HomeNavbar() {
               </NavLink>
             </Box>
             <Box className={"hover-line"}>
-              <NavLink to="/product" activeClassName={"underline"}>
+              <NavLink to="/products" activeClassName={"underline"}>
                 Products
               </NavLink>
             </Box>
