@@ -7,10 +7,11 @@ import reportWebVitals from './reportWebVitals';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter as Router } from "react-router-dom";
+import ContextProvider from "./app/context/ContextProvider";
 import theme from './app/MaterialTheme';
 import './css/index.css';
 
-const container = document.getElementById('root'); // Get the root container element
+const container = document.getElementById("root"); // Get the root container element
 if (!container) throw new Error("Root container is missing in index.html");
 
 const root = ReactDOM.createRoot(container); // Create a root
@@ -19,14 +20,16 @@ const root = ReactDOM.createRoot(container); // Create a root
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={theme}> 
-        <CssBaseline />
-        <Router>
-          <App />
-        </Router>
-      </ThemeProvider>
+    <ContextProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Router>
+            <App />
+          </Router>
+        </ThemeProvider>
+      </ContextProvider>
     </Provider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
