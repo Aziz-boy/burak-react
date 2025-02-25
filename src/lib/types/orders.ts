@@ -10,7 +10,7 @@ export interface OrderItemInput {
 
 export interface OrderItem {
   _id: string;
-  itemQuality: number;
+  itemQuantity: number;
   itemPrice: number;
   orderId: string;
   productId: string;
