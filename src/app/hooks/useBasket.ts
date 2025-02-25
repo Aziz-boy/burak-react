@@ -14,7 +14,6 @@ const useBasket = () => {
           ? { ...exist, quantity: exist.quantity + 1 }
           : item
       );
-      setCartItems(cartUpdate);
       localStorage.setItem("cartData", JSON.stringify(cartUpdate));
     } else {
       const cartUpdate = [...cartItems, { ...input }];
