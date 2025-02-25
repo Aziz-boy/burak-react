@@ -325,20 +325,19 @@
   .product-img
   .view-btn {
   position: absolute;
-  left: 196px;
-  top: 223px;
+  width: 30px;
+  height: 30px;
   padding: 5px;
-  min-width: 40px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  box-sizing: border-box;
+  border-radius: 50%;
+  left: 185px;
+  top: 230px;
   cursor: pointer;
   z-index: 3;
   opacity: 0;
   transition: opacity 0.5s ease;
-  border-radius: 50%;
+ 
+  background: transparent;
 }
 
 .products-page .products .list-category-section .product-wrapper .no-data {
