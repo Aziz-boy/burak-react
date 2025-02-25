@@ -14,7 +14,10 @@ import { Order, OrderInquiry } from "../../../lib/types/orders";
 import { OrderStatus } from "../../../lib/enums/order.enum";
 import OrderService from "../../services/OrderService";
 import { useGlobals } from "../../hooks/useGlobals";
+import { useHistory } from "react-router-dom";
 import "../../../css/order.css";
+import { serverApi } from "../../../lib/config";
+import { MemberType } from "../../../lib/enums/member.enum";
 
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -26,7 +29,8 @@ const actionDispatch = (dispatch: Dispatch) => ({
 export default function OrdersPage() {
   const { setPausedOrders, setProcessOrders, setFinishedOrders } =
     actionDispatch(useDispatch());
-  const { orderBuilder } = useGlobals();
+  const { orderBuilder, authMember } = useGlobals();
+  const history = useHistory();
   const [value, setValue] = useState("1");
   const [orderInquiry, setOrderInquiry] = useState<OrderInquiry>({
     page: 1,
@@ -59,6 +63,7 @@ export default function OrdersPage() {
     setValue(newValue);
   };
 
+  if (!authMember) history.push("/");
   return (
     <div className={"order-page"}>
       <Container className="order-container">
@@ -85,7 +90,7 @@ export default function OrdersPage() {
               </Box>
             </Box>
             <Stack className="order-main-content">
-            <PausedOrders setValue={setValue} />
+              <PausedOrders setValue={setValue} />
               <ProcessOrders setValue={setValue} />
               <FinishedOrders />
             </Stack>
@@ -97,18 +102,26 @@ export default function OrdersPage() {
             <Box className="member-box">
               <div className="order-user-img">
                 <img
-                  src="/icons/default-user.svg"
+                  src={
+                    authMember?.memberImage
+                      ? `${serverApi}/${authMember.memberImage}`
+                      : "/icons/default-user.svg"
+                  }
                   className="order-user-avatar"
                 />
                 <div className="order-user-icon-box">
                   <img
-                    src="/icons/user-badge.svg"
+                    src={
+                      authMember?.memberType === MemberType.RESTAURANT
+                        ? "/icons/restaurant.svg"
+                        : "/icons/user-badge.svg"
+                    }
                     className="order-user-prof-img"
                   />
                 </div>
               </div>
-              <span className="order-user-name">Martin</span>
-              <span className="order-user-prof">Justin</span>
+              <span className="order-user-name">{authMember?.memberNick}</span>
+              <span className="order-user-prof">{authMember?.memberType}</span>
             </Box>
             <Box className="liner">
               <Box className="liner-inside"></Box>
@@ -118,7 +131,11 @@ export default function OrdersPage() {
                 src="/icons/location.svg"
                 className="order-user-location-img"
               />
-              <p>South Korea, Busan</p>
+              <p>
+                {authMember?.memberAddress
+                  ? authMember.memberAddress
+                  : "Do not exist"}
+              </p>
             </Box>
           </Box>
           <Box className="payment-info-box">

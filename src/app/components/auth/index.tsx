@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 2, 2),
   },
 }));
+
 const ModalImg = styled.img`
   width: 62%;
   height: 100%;
@@ -34,12 +35,14 @@ const ModalImg = styled.img`
   margin-top: 9px;
   margin-left: 10px;
 `;
+
 interface AuthenticationModalProps {
   signupOpen: boolean;
   loginOpen: boolean;
   handleSignupClose: () => void;
   handleLoginClose: () => void;
 }
+
 export default function AuthenticationModal(props: AuthenticationModalProps) {
   const { signupOpen, loginOpen, handleSignupClose, handleLoginClose } = props;
   const classes = useStyles();
@@ -87,7 +90,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
 
       const member = new MemberService();
       const result = await member.signup(signupInput);
-      // Saving Authencticated user
+
       setAuthMember(result);
       handleSignupClose();
     } catch (err) {
@@ -110,7 +113,6 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
       const member = new MemberService();
       const result = await member.login(loginInput);
 
-      // Saving Authencticated user
       setAuthMember(result);
       handleLoginClose();
     } catch (err) {
@@ -177,6 +179,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
           </Stack>
         </Fade>
       </Modal>
+
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
