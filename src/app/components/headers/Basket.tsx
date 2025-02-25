@@ -20,11 +20,11 @@ interface BasketProps {
   onDelete: (item: CartItem) => void;
   onDeleteAll: () => void;
 }
+
 export default function Basket(props: BasketProps) {
   const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = props;
-  const { authMember } = useGlobals();
+  const { authMember, setOrderBuilder } = useGlobals();
   const history = useHistory();
-
   const itemsPrice = cartItems.reduce(
     (a: number, c: CartItem) => a + c.quantity * c.price,
     0
@@ -39,6 +39,7 @@ export default function Basket(props: BasketProps) {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(e.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -53,7 +54,7 @@ export default function Basket(props: BasketProps) {
 
       onDeleteAll();
 
-      //REFRESH VIA CONTEXT
+      setOrderBuilder(new Date());
       history.push("/orders");
     } catch (err) {
       console.log(err);
@@ -112,7 +113,7 @@ export default function Basket(props: BasketProps) {
       >
         <Stack className={"basket-frame"}>
           <Box className={"all-check-box"}>
-          {cartItems.length === 0 ? (
+            {cartItems.length === 0 ? (
               <div>Cart is empty!</div>
             ) : (
               <Stack flexDirection={"row"}>
@@ -128,12 +129,12 @@ export default function Basket(props: BasketProps) {
 
           <Box className={"orders-main-wrapper"}>
             <Box className={"orders-wrapper"}>
-            {cartItems.map((item: CartItem) => {
+              {cartItems.map((item: CartItem) => {
                 const imagePath = `${serverApi}/${item.image}`;
                 return (
                   <Box className={"basket-info-box"} key={item._id}>
                     <div className={"cancel-btn"}>
-                    <CancelIcon
+                      <CancelIcon
                         color={"primary"}
                         onClick={() => onDelete(item)}
                       />
@@ -145,7 +146,7 @@ export default function Basket(props: BasketProps) {
                     </p>
                     <Box sx={{ minWidth: 120 }}>
                       <div className="col-2">
-                      <button
+                        <button
                           onClick={() => onRemove(item)}
                           className="remove"
                         >

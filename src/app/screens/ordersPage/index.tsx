@@ -3,18 +3,18 @@ import { Box, Container, Input, Stack } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PausedOrders from "./PausedOrders";
 import ProcessOrders from "./ProcessOrders";
 import FinishedOrders from "./FinishedOrders";
-
 import { useDispatch } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { setPausedOrders, setProcessOrders, setFinishedOrders } from "./slice";
-import "../../../css/order.css";
+
 import { Order, OrderInquiry } from "../../../lib/types/orders";
 import { OrderStatus } from "../../../lib/enums/order.enum";
 import OrderService from "../../services/OrderService";
+import { useGlobals } from "../../hooks/useGlobals";
+import "../../../css/order.css";
 
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -26,6 +26,7 @@ const actionDispatch = (dispatch: Dispatch) => ({
 export default function OrdersPage() {
   const { setPausedOrders, setProcessOrders, setFinishedOrders } =
     actionDispatch(useDispatch());
+  const { orderBuilder } = useGlobals();
   const [value, setValue] = useState("1");
   const [orderInquiry, setOrderInquiry] = useState<OrderInquiry>({
     page: 1,
@@ -50,13 +51,14 @@ export default function OrdersPage() {
       .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.FINISH })
       .then((data) => setFinishedOrders(data))
       .catch((err) => console.log(err));
-  }, [orderInquiry]);
+  }, [orderInquiry, orderBuilder]);
 
   /** HANDLERS **/
 
   const handleChange = (e: SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
+
   return (
     <div className={"order-page"}>
       <Container className="order-container">
@@ -83,12 +85,13 @@ export default function OrdersPage() {
               </Box>
             </Box>
             <Stack className="order-main-content">
-              <PausedOrders />
-              <ProcessOrders />
+            <PausedOrders setValue={setValue} />
+              <ProcessOrders setValue={setValue} />
               <FinishedOrders />
             </Stack>
           </TabContext>
         </Stack>
+
         <Stack className="order-right">
           <Box className="order-info-box">
             <Box className="member-box">
@@ -97,15 +100,15 @@ export default function OrdersPage() {
                   src="/icons/default-user.svg"
                   className="order-user-avatar"
                 />
-                {/* <div className="order-user-icon-box">
+                <div className="order-user-icon-box">
                   <img
                     src="/icons/user-badge.svg"
                     className="order-user-prof-img"
                   />
-                </div> */}
+                </div>
               </div>
               <span className="order-user-name">Martin</span>
-              <span className="order-user-prof">Adam</span>
+              <span className="order-user-prof">Justin</span>
             </Box>
             <Box className="liner">
               <Box className="liner-inside"></Box>
@@ -115,7 +118,7 @@ export default function OrdersPage() {
                 src="/icons/location.svg"
                 className="order-user-location-img"
               />
-              <p>South Korea, Incheon</p>
+              <p>South Korea, Busan</p>
             </Box>
           </Box>
           <Box className="payment-info-box">
@@ -136,12 +139,12 @@ export default function OrdersPage() {
                 placeholder="07 / 24"
               />
             </Box>
-            <input className="client-name" placeholder="Aminboy Fattoev" />
+            <input className="client-name" placeholder="Justin Robertson" />
             <Box className="cards">
               <img src="/icons/visa-card.svg" />
-              <img src="/icons/western-card.svg" />
-              <img src="/icons/paypal-card.svg" />
-              <img src="/icons/master-card.svg" />
+              <img src="/icons/visa-card.svg" />
+              <img src="/icons/visa-card.svg" />
+              <img src="/icons/visa-card.svg" />
             </Box>
           </Box>
         </Stack>

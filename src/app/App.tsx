@@ -1,27 +1,25 @@
 import React, { useState } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import HomePage from "./screens/homePage";
-import ProductsPage from "./screens/productsPage";
+import ProductPage from "./screens/productsPage";
 import OrdersPage from "./screens/ordersPage";
-import UsersPage from "./screens/userPage";
-import HelpPage from "./screens/helpPage/index";
+import UserPage from "./screens/userPage";
 import HomeNavbar from "./components/headers/HomeNavbar";
 import OtherNavbar from "./components/headers/OtherNavbar";
 import Footer from "./components/footer";
+import HelpPage from "./screens/helpPage";
 import useBasket from "./hooks/useBasket";
 import AuthenticationModal from "./components/auth";
-import { T } from "../lib/types/common";
 import { sweetErrorHandling, sweetTopSuccessAlert } from "../lib/sweetAlert";
 import { Messages } from "../lib/config";
+import MemberService from "./services/MemberService";
+import { useGlobals } from "./hooks/useGlobals";
 import "../css/app.css";
 import "../css/navbar.css";
 import "../css/footer.css";
-import MemberService from "./services/MemberService";
-import { useGlobals } from "./hooks/useGlobals";
-
 
 function App() {
-  const location = useLocation(); //react router domning hooki object return qiladi
+  const location = useLocation();
   const { setAuthMember } = useGlobals();
   const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = useBasket();
   const [signupOpen, setSignupOpen] = useState<boolean>(false);
@@ -29,6 +27,7 @@ function App() {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   /** HANDLERS **/
+
   const handleSignupClose = () => setSignupOpen(false);
   const handleLoginClose = () => setLoginOpen(false);
 
@@ -50,7 +49,6 @@ function App() {
   };
 
   return (
-
     <>
       {location.pathname === "/" ? (
         <HomeNavbar
@@ -83,13 +81,13 @@ function App() {
       )}
       <Switch>
         <Route path="/products">
-          <ProductsPage onAdd={onAdd} />
+          <ProductPage onAdd={onAdd} />
         </Route>
         <Route path="/orders">
           <OrdersPage />
         </Route>
         <Route path="/member-page">
-          <UsersPage />
+          <UserPage />
         </Route>
         <Route path="/help">
           <HelpPage />
@@ -99,6 +97,7 @@ function App() {
         </Route>
       </Switch>
       <Footer />
+
       <AuthenticationModal
         signupOpen={signupOpen}
         loginOpen={loginOpen}
