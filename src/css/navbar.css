@@ -496,11 +496,14 @@
     margin-top: 40px;
     height: auto;
     align-items: center;
+    flex-direction: column;
+    gap: 30px;
   }
 
   .home-navbar .navbar-container .header-frame .detail {
     align-items: center;
     text-align: center;
+    order: 1;
   }
 
   .home-navbar .navbar-container .header-frame .detail .head-main-txt {
@@ -530,6 +533,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    order: 2;
   }
 
   .home-navbar .navbar-container .logo-frame .logo-img {
@@ -537,6 +541,23 @@
     height: 100%;
     background-position: center;
     background-size: contain;
+  }
+
+  .home-navbar .navbar-container .detail .signup {
+    display: none;
+  }
+
+  .home-navbar .navbar-container .header-frame .signup {
+    order: 3;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .home-navbar .navbar-container .header-frame .signup .signup-button {
+    width: 180px;
+    height: 50px;
+    font-size: 15px;
   }
 
   /* Basket Responsive Styles */
@@ -601,10 +622,14 @@
     font-size: 16px;
   }
 
+  .home-navbar .navbar-container .detail .signup {
+    margin-top: 15px;
+  }
+
   .home-navbar .navbar-container .detail .signup .signup-button {
-    width: 180px;
-    height: 50px;
-    font-size: 15px;
+    width: 160px;
+    height: 45px;
+    font-size: 14px;
   }
 
   .home-navbar .navbar-container .logo-frame {
@@ -652,6 +677,16 @@
 
   .basket-order .price {
     font-size: 16px;
+  }
+
+  .home-navbar .navbar-container .header-frame .signup {
+    margin-top: 25px;
+  }
+
+  .home-navbar .navbar-container .header-frame .signup .signup-button {
+    width: 160px;
+    height: 45px;
+    font-size: 14px;
   }
 }
 

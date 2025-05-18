@@ -252,21 +252,21 @@ export default function HomeNavbar(props: HomeNavbarProps) {
             </Box>
             <Box className={"wel-txt"}>The Choice, not just a choice</Box>
             <Box className={"service-txt"}>24 hours service</Box>
-            <Box className={"signup"}>
-              {!authMember ? (
-                <Button
-                  variant={"contained"}
-                  className={"signup-button"}
-                  onClick={() => setSignupOpen(true)}
-                >
-                  SIGN UP
-                </Button>
-              ) : null}
-            </Box>
           </Stack>
           <Box className={"logo-frame"}>
             <div className={"logo-img"}></div>
           </Box>
+          {!authMember ? (
+            <Box className={"signup"}>
+              <Button
+                variant={"contained"}
+                className={"signup-button"}
+                onClick={() => setSignupOpen(true)}
+              >
+                SIGN UP
+              </Button>
+            </Box>
+          ) : null}
         </Stack>
       </Container>
     </div>
