@@ -1071,77 +1071,287 @@
 
 .homepage .active-users-frame {
   width: 100%;
-  height: 605px;
-  display: flex;
-  background: #f8f8ff;
+  min-height: 600px;
+  background: linear-gradient(180deg, #f8f8ff 0%, #f0f0f5 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 60px 0;
 }
 
-.homepage .main {
-  margin-top: 45px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.homepage .active-users-frame::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at 20% 20%,
+    rgba(215, 182, 134, 0.05) 0%,
+    transparent 50%
+  );
+  z-index: 1;
+}
+
+.homepage .active-users-frame .main {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
 }
 
 .homepage .active-users-frame .category-title {
-  font-family: "Dancing Script";
-  font-style: normal;
+  text-align: center;
+  font-size: 2.5rem;
   font-weight: 700;
-  font-size: 36px;
-  line-height: 43px;
+  color: #343434;
+  font-family: "Roboto Serif", serif;
+  margin-bottom: 50px;
+  position: relative;
 }
 
-.homepage .active-users-frame .main .cards-frame {
-  width: 100%;
-  margin: 47px 2px 2px 2px;
+.homepage .active-users-frame .category-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #d7b686 0%, #c4a575 100%);
+  border-radius: 2px;
+}
+
+.homepage .active-users-frame .cards-frame {
+  display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: space-between;
+  gap: 30px;
+  padding: 20px 0;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-.homepage .active-users-frame .main .card {
-  height: 319px;
-  width: 305px;
-  cursor: pointer;
+.homepage .active-users-frame .card {
+  flex: 1;
+  min-width: 0;
+  height: 360px;
+  background: linear-gradient(145deg, #ffffff 0%, #f8f8ff 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.homepage .active-users-frame .card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(215, 182, 134, 0.15);
+}
+
+.homepage .active-users-frame .card:hover .member-image {
+  transform: scale(1.1);
+}
+
+.homepage .active-users-frame .card:hover .member-nickname {
+  color: #d7b686;
 }
 
 .homepage .active-users-frame .product-detail {
-  width: auto;
-  height: 212px;
-  margin-top: -12px;
-  border-bottom: 1px solid;
-  border-left: 1px solid;
-  border-right: 1px solid;
-  border-color: #b7b7b7;
-  background-color: #fff;
+  background: linear-gradient(145deg, #ffffff 0%, #f8f8ff 100%);
+  border-top: 1px solid rgba(215, 182, 134, 0.1);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  height: 80px;
 }
 
-.homepage .active-users-frame .product-detail .member-nickname {
-  color: #000;
-  display: flex;
-  justify-content: center;
+.homepage .active-users-frame .member-nickname {
   text-align: center;
-  font-family: "Roboto Serif";
-  font-size: 17px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  margin-bottom: 10px;
+  color: #343434;
+  font-family: "Roboto Serif", serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  padding: 0 10px;
+  white-space: normal;
+  overflow: visible;
+  line-height: 1.4;
+}
+
+.homepage .active-users-frame .member-nickname:hover {
+  color: #d7b686;
+  transform: scale(1.05);
 }
 
 .homepage .active-users-frame .no-data {
   width: 100%;
   height: 300px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-transform: capitalize;
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 30px;
-  line-height: 34px;
-  color: #e3c09d;
+  justify-content: center;
+  background: linear-gradient(
+    145deg,
+    rgba(215, 182, 134, 0.1) 0%,
+    rgba(215, 182, 134, 0.05) 100%
+  );
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(215, 182, 134, 0.1);
+  color: #d7b686;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 1200px) {
+  .homepage .active-users-frame .cards-frame {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 20px;
+  }
+
+  .homepage .active-users-frame .card {
+    grid-column: span 2;
+    height: 280px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .homepage .active-users-frame {
+    min-height: 500px;
+    padding: 40px 0;
+  }
+
+  .homepage .active-users-frame .main {
+    padding: 0 30px;
+  }
+
+  .homepage .active-users-frame .category-title {
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+  }
+
+  .homepage .active-users-frame .cards-frame {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+  }
+
+  .homepage .active-users-frame .card {
+    grid-column: span 2;
+    height: 260px;
+  }
+
+  .homepage .active-users-frame .member-nickname {
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .homepage .active-users-frame {
+    min-height: 450px;
+    padding: 30px 0;
+  }
+
+  .homepage .active-users-frame .main {
+    padding: 0 20px;
+  }
+
+  .homepage .active-users-frame .category-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .homepage .active-users-frame .cards-frame {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+  }
+
+  .homepage .active-users-frame .card {
+    grid-column: span 2;
+    height: 280px;
+  }
+
+  .homepage .active-users-frame .product-detail {
+    padding: 12px 8px;
+    height: 70px;
+  }
+
+  .homepage .active-users-frame .member-nickname {
+    font-size: 1.2rem;
+    padding: 0 5px;
+    line-height: 1.3;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .homepage .active-users-frame {
+    min-height: 400px;
+    padding: 20px 0;
+  }
+
+  .homepage .active-users-frame .main {
+    padding: 0 15px;
+  }
+
+  .homepage .active-users-frame .category-title {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+  }
+
+  .homepage .active-users-frame .cards-frame {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .homepage .active-users-frame .card {
+    grid-column: span 1;
+    height: 320px;
+  }
+
+  .homepage .active-users-frame .product-detail {
+    padding: 10px 6px;
+    height: 60px;
+  }
+
+  .homepage .active-users-frame .member-nickname {
+    font-size: 1.1rem;
+    padding: 0 4px;
+    line-height: 1.2;
+  }
+
+  .homepage .active-users-frame .no-data {
+    height: 250px;
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .homepage .active-users-frame .card {
+    height: 280px;
+  }
+
+  .homepage .active-users-frame .product-detail {
+    height: 50px;
+  }
+
+  .homepage .active-users-frame .member-nickname {
+    font-size: 1rem;
+    padding: 0 3px;
+  }
 }
 
 /** EVENTS **/
@@ -1151,15 +1361,8 @@
   height: 745px;
   background: #f8f8ff;
   display: flex;
-}
-
-.homepage .events-frame .category-title {
-  font-family: "Dancing Script";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 43px;
-  padding-top: 20px;
+  position: relative;
+  overflow: hidden;
 }
 
 .homepage .events-frame .events-main {
@@ -1169,9 +1372,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 40px 0;
 }
 
-.homepage .events-frame .events-main .events-text {
+.homepage .events-frame .events-text {
   width: auto;
   height: 70px;
   margin-bottom: 40px;
@@ -1181,31 +1385,24 @@
   justify-content: center;
 }
 
-.homepage .events-frame .events-main .prev-next-frame {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 250px;
-  margin: 40px 0 40px 0;
-  height: 25px;
+.homepage .events-frame .category-title {
+  font-family: "Dancing Script";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 43px;
+  color: #343434;
+  text-align: center;
 }
 
-.homepage .events-frame .dot-frame-pagination {
-  position: relative;
-  width: auto;
-  display: flex;
-}
-
-.homepage .events-frame .events-main .events-info {
+.homepage .events-frame .events-info {
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
 }
 
-.homepage .events-frame .events-info .events-info-frame {
+.homepage .events-frame .events-info-frame {
   position: relative;
   width: 500px;
   height: 100%;
@@ -1220,12 +1417,24 @@
   display: flex;
   border-radius: 10px;
   background-size: cover;
+  overflow: hidden;
+}
+
+.homepage .events-frame .events-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.homepage .events-frame .events-img:hover img {
+  transform: scale(1.05);
 }
 
 .homepage .events-frame .events-desc {
   position: absolute;
   margin-bottom: 7px;
-  padding: 10px;
+  padding: 20px;
   display: flex;
   width: 90%;
   height: auto;
@@ -1235,7 +1444,7 @@
   border-radius: 8px;
 }
 
-.homepage .events-frame .events-desc .events-bott {
+.homepage .events-frame .events-bott {
   width: 97%;
   height: auto;
   display: flex;
@@ -1244,92 +1453,296 @@
   align-items: center;
 }
 
-.homepage .events-frame .events-desc .events-bott .bott-left {
+.homepage .events-frame .bott-left {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.homepage .events-frame .bott-left .event-title-speaker {
+.homepage .events-frame .event-title-speaker {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
-.homepage .events-frame .event-title-speaker .event-organizator {
+.homepage .events-frame .event-title-speaker strong {
+  font-family: "Roboto Serif";
+  font-size: 24px;
+  font-weight: 600;
+  color: #343434;
+}
+
+.homepage .events-frame .event-organizator {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
-.homepage .events-frame .event-title-speaker .event-organizator img {
+.homepage .events-frame .event-organizator img {
   width: 20px;
-  margin-right: 10px;
+  height: 20px;
 }
 
-.homepage .events-frame .event-organizator .spec-text-author {
-  font-family: "GT Walsheim Pro";
-  font-style: normal;
-  line-height: 34px;
-  color: #140342;
+.homepage .events-frame .spec-text-author {
+  font-family: "Poppins";
+  font-size: 16px;
+  color: #666;
+  margin: 0;
 }
 
-.homepage .events-frame .bott-left .text-desc {
-  margin-top: 10px;
-  font-family: "GT Walsheim Pro";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 17px;
-  line-height: 26px;
-  color: #4f547b;
+.homepage .events-frame .text-desc {
+  margin: 15px 0;
+  font-family: "Poppins";
+  font-size: 16px;
+  line-height: 1.6;
+  color: #666;
 }
 
-.homepage .events-frame .bott-left .bott-info {
-  margin-top: 10px;
+.homepage .events-frame .bott-info {
+  margin-top: 15px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  gap: 20px;
   flex-direction: row;
   width: 100%;
   height: 16px;
 }
 
-.homepage .events-frame .bott-info .bott-info-main {
-  margin-left: 10px;
+.homepage .events-frame .bott-info-main {
   display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  width: auto;
-  height: 100%;
-  font-family: "GT Walsheim Pro";
-  font-style: normal;
-  font-weight: 400;
+  align-items: center;
+  gap: 8px;
+  font-family: "Poppins";
   font-size: 14px;
-  line-height: 16px;
-  color: #4f547b;
+  color: #666;
 }
 
-.homepage .events-frame .bott-info .bott-info-main img {
-  margin-right: 10px;
+.homepage .events-frame .bott-info-main img {
+  width: 16px;
+  height: 16px;
 }
 
-.homepage .events-frame .swiper-wrapper {
+.homepage .events-frame .prev-next-frame {
+  position: relative;
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  margin: 40px 0;
+  height: 25px;
+}
+
+.homepage .events-frame .swiper-button-prev,
+.homepage .events-frame .swiper-button-next {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.homepage .events-frame .swiper-button-prev:hover,
+.homepage .events-frame .swiper-button-next:hover {
+  transform: scale(1.1);
+}
+
+.homepage .events-frame .dot-frame-pagination {
+  position: relative;
+  width: auto;
+  display: flex;
+  gap: 8px;
 }
 
 .homepage .events-frame .swiper-pagination-bullet {
-  margin-right: 5px;
   width: 8px;
   height: 8px;
-  text-align: center;
-  opacity: 1;
   background: #f8f8ff;
+  opacity: 1;
   border-radius: 50%;
+  transition: all 0.3s ease;
 }
 
 .homepage .events-frame .swiper-pagination-bullet-active {
   background: #343434;
-  border-radius: 50%;
+  transform: scale(1.2);
+}
+
+@media screen and (max-width: 1200px) {
+  .homepage .events-frame {
+    height: auto;
+    min-height: 700px;
+  }
+
+  .homepage .events-frame .events-info {
+    padding: 0 30px;
+  }
+
+  .homepage .events-frame .events-info-frame {
+    width: 450px;
+  }
+
+  .homepage .events-frame .event-title-speaker strong {
+    font-size: 22px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .homepage .events-frame {
+    min-height: 650px;
+  }
+
+  .homepage .events-frame .events-main {
+    padding: 30px 0;
+  }
+
+  .homepage .events-frame .events-text {
+    margin-bottom: 30px;
+  }
+
+  .homepage .events-frame .category-title {
+    font-size: 32px;
+  }
+
+  .homepage .events-frame .events-info {
+    padding: 0 20px;
+  }
+
+  .homepage .events-frame .events-info-frame {
+    width: 400px;
+  }
+
+  .homepage .events-frame .events-desc {
+    padding: 15px;
+  }
+
+  .homepage .events-frame .event-title-speaker strong {
+    font-size: 20px;
+  }
+
+  .homepage .events-frame .text-desc {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .homepage .events-frame {
+    min-height: 600px;
+  }
+
+  .homepage .events-frame .events-main {
+    padding: 20px 0;
+  }
+
+  .homepage .events-frame .events-text {
+    margin-bottom: 25px;
+  }
+
+  .homepage .events-frame .category-title {
+    font-size: 28px;
+  }
+
+  .homepage .events-frame .events-info {
+    padding: 0 15px;
+  }
+
+  .homepage .events-frame .events-info-frame {
+    width: 350px;
+  }
+
+  .homepage .events-frame .events-desc {
+    padding: 12px;
+    width: 95%;
+  }
+
+  .homepage .events-frame .event-title-speaker {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .homepage .events-frame .event-title-speaker strong {
+    font-size: 18px;
+  }
+
+  .homepage .events-frame .spec-text-author {
+    font-size: 14px;
+  }
+
+  .homepage .events-frame .text-desc {
+    font-size: 13px;
+    margin: 10px 0;
+  }
+
+  .homepage .events-frame .bott-info {
+    flex-direction: column;
+    gap: 10px;
+    height: auto;
+  }
+
+  .homepage .events-frame .bott-info-main {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .homepage .events-frame {
+    min-height: 550px;
+  }
+
+  .homepage .events-frame .events-main {
+    padding: 15px 0;
+  }
+
+  .homepage .events-frame .events-text {
+    margin-bottom: 20px;
+  }
+
+  .homepage .events-frame .category-title {
+    font-size: 24px;
+  }
+
+  .homepage .events-frame .events-info {
+    padding: 0 10px;
+  }
+
+  .homepage .events-frame .events-info-frame {
+    width: 300px;
+  }
+
+  .homepage .events-frame .events-desc {
+    padding: 10px;
+    width: 98%;
+  }
+
+  .homepage .events-frame .event-title-speaker strong {
+    font-size: 16px;
+  }
+
+  .homepage .events-frame .spec-text-author {
+    font-size: 13px;
+  }
+
+  .homepage .events-frame .text-desc {
+    font-size: 12px;
+    margin: 8px 0;
+  }
+
+  .homepage .events-frame .bott-info-main {
+    font-size: 12px;
+  }
+
+  .homepage .events-frame .prev-next-frame {
+    width: 200px;
+    margin: 30px 0;
+  }
+
+  .homepage .events-frame .swiper-button-prev,
+  .homepage .events-frame .swiper-button-next {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .statistics {

@@ -2,6 +2,11 @@ import {
   Box,
   Button,
   Container,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
   ListItemIcon,
   Menu,
   MenuItem,
@@ -12,7 +17,9 @@ import Basket from "./Basket";
 import { CartItem } from "../../../lib/types/search";
 import { useGlobals } from "../../hooks/useGlobals";
 import { serverApi } from "../../../lib/config";
-import { Logout } from "@mui/icons-material";
+import { Logout, Menu as MenuIcon } from "@mui/icons-material";
+import { useState } from "react";
+import "../../../css/navbar.css";
 
 interface OtherNavbarProps {
   cartItems: CartItem[];
@@ -27,8 +34,8 @@ interface OtherNavbarProps {
   handleCloseLogut: () => void;
   handleLogoutRequest: () => void;
 }
-export default function OtherNavbar(props: OtherNavbarProps) {
 
+export default function OtherNavbar(props: OtherNavbarProps) {
   const {
     cartItems,
     onAdd,
@@ -43,40 +50,112 @@ export default function OtherNavbar(props: OtherNavbarProps) {
     handleLogoutRequest,
   } = props;
   const { authMember } = useGlobals();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+      <List>
+        <ListItem>
+          <NavLink to="/" className="mobile-nav-link">
+            <ListItemText primary="Home" />
+          </NavLink>
+        </ListItem>
+        <ListItem>
+          <NavLink to="/products" className="mobile-nav-link">
+            <ListItemText primary="Products" />
+          </NavLink>
+        </ListItem>
+        {authMember && (
+          <ListItem>
+            <NavLink to="/orders" className="mobile-nav-link">
+              <ListItemText primary="Orders" />
+            </NavLink>
+          </ListItem>
+        )}
+        {authMember && (
+          <ListItem>
+            <NavLink to="/member-page" className="mobile-nav-link">
+              <ListItemText primary="My Page" />
+            </NavLink>
+          </ListItem>
+        )}
+        <ListItem>
+          <NavLink to="/help" className="mobile-nav-link">
+            <ListItemText primary="Help" />
+          </NavLink>
+        </ListItem>
+        {!authMember ? (
+          <ListItem>
+            <Button
+              variant="contained"
+              className="login-button"
+              onClick={() => {
+                setLoginOpen(true);
+                handleDrawerToggle();
+              }}
+            >
+              Login
+            </Button>
+          </ListItem>
+        ) : (
+          <ListItem>
+            <img
+              className="user-avatar"
+              src={
+                authMember?.memberImage
+                  ? `${serverApi}/${authMember?.memberImage}`
+                  : "/icons/default-user.svg"
+              }
+              aria-haspopup={"true"}
+              onClick={(e) => {
+                handleLogoutClick(e);
+                handleDrawerToggle();
+              }}
+            />
+          </ListItem>
+        )}
+      </List>
+    </Box>
+  );
+
   return (
     <div className="other-navbar">
       <Container className="navbar-container">
         <Stack className="menu">
           <Box>
             <NavLink to="/">
-              <img className="brand-logo" src="/icons/burak.svg" />
+              <img className="brand-logo" alt="burak" src="/icons/burak.svg" />
             </NavLink>
           </Box>
           <Stack className="links">
-            <Box className={"hover-line"}>
+            <Box className="hover-line">
               <NavLink to="/">Home</NavLink>
             </Box>
-            <Box className={"hover-line"}>
-              <NavLink to="/products" activeClassName={"underline"}>
+            <Box className="hover-line">
+              <NavLink to="/products" activeClassName="underline">
                 Products
               </NavLink>
             </Box>
             {authMember ? (
-              <Box className={"hover-line"}>
-                <NavLink to="/orders" activeClassName={"underline"}>
+              <Box className="hover-line">
+                <NavLink to="/orders" activeClassName="underline">
                   Orders
                 </NavLink>
               </Box>
             ) : null}
             {authMember ? (
-              <Box className={"hover-line"}>
-                <NavLink to="/member-page" activeClassName={"underline"}>
+              <Box className="hover-line">
+                <NavLink to="/member-page" activeClassName="underline">
                   My Page
                 </NavLink>
               </Box>
             ) : null}
-            <Box className={"hover-line"}>
-              <NavLink to="/help" activeClassName={"underline"}>
+            <Box className="hover-line">
+              <NavLink to="/help" activeClassName="underline">
                 Help
               </NavLink>
             </Box>
@@ -105,12 +184,12 @@ export default function OtherNavbar(props: OtherNavbarProps) {
                     ? `${serverApi}/${authMember?.memberImage}`
                     : "/icons/default-user.svg"
                 }
-                aria-haspopup={"true"}
+                alt="User avatar"
+                aria-haspopup="true"
                 onClick={handleLogoutClick}
               />
             )}
-
-<Menu
+            <Menu
               anchorEl={anchorEl}
               id="account-menu"
               open={Boolean(anchorEl)}
@@ -152,10 +231,30 @@ export default function OtherNavbar(props: OtherNavbarProps) {
                 Logout
               </MenuItem>
             </Menu>
-
           </Stack>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            className="burger-button"
+          >
+            <MenuIcon />
+          </IconButton>
         </Stack>
       </Container>
+      <Drawer
+        variant="temporary"
+        anchor="right"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true,
+        }}
+        className="mobile-drawer"
+      >
+        {drawer}
+      </Drawer>
     </div>
   );
 }
