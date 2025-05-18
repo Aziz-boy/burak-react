@@ -7,13 +7,20 @@ import {
   Menu,
   MenuItem,
   Stack,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Basket from "./Basket";
 import { CartItem } from "../../../lib/types/search";
 import { useGlobals } from "../../hooks/useGlobals";
 import { serverApi } from "../../../lib/config";
-import { BoltOutlined, Logout } from "@mui/icons-material";
+import { BoltOutlined, Logout, Menu as MenuIcon } from "@mui/icons-material";
 
 interface HomeNavbarProps {
   cartItems: CartItem[];
@@ -28,6 +35,7 @@ interface HomeNavbarProps {
   handleCloseLogut: () => void;
   handleLogoutRequest: () => void;
 }
+
 export default function HomeNavbar(props: HomeNavbarProps) {
   const {
     cartItems,
@@ -43,8 +51,70 @@ export default function HomeNavbar(props: HomeNavbarProps) {
     handleLogoutRequest,
   } = props;
   const { authMember } = useGlobals();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  /** HANDLERS */
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const navItems = [
+    { label: "Home", path: "/" },
+    { label: "Products", path: "/products" },
+    ...(authMember ? [{ label: "Orders", path: "/orders" }] : []),
+    ...(authMember ? [{ label: "My Page", path: "/member-page" }] : []),
+    { label: "Help", path: "/help" },
+  ];
+
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+      <List>
+        {navItems.map((item) => (
+          <ListItem
+            key={item.label}
+            component={NavLink}
+            to={item.path}
+            className="hover-line"
+          >
+            <ListItemText primary={item.label} />
+          </ListItem>
+        ))}
+        {!authMember ? (
+          <ListItem>
+            <Button
+              variant="contained"
+              className="login-button"
+              onClick={() => {
+                setLoginOpen(true);
+                handleDrawerToggle();
+              }}
+              fullWidth
+            >
+              Login
+            </Button>
+          </ListItem>
+        ) : (
+          <ListItem>
+            <img
+              alt="Profile-picture"
+              className="user-avatar"
+              src={
+                authMember?.memberImage
+                  ? `${serverApi}/${authMember?.memberImage}`
+                  : "/icons/default-user.svg"
+              }
+              aria-haspopup={"true"}
+              onClick={(e) => {
+                handleLogoutClick(e);
+                handleDrawerToggle();
+              }}
+            />
+          </ListItem>
+        )}
+      </List>
+    </Box>
+  );
 
   return (
     <div className="home-navbar">
@@ -55,111 +125,126 @@ export default function HomeNavbar(props: HomeNavbarProps) {
               <img className="brand-logo" alt="Logo" src="/icons/burak.svg" />
             </NavLink>
           </Box>
-          <Stack className="links">
-            <Box className={"hover-line"}>
-              <NavLink to="/" activeClassName={"underline"}>
-                Home
-              </NavLink>
-            </Box>
-            <Box className={"hover-line"}>
-              <NavLink to="/products" activeClassName={"underline"}>
-                Products
-              </NavLink>
-            </Box>
-            {authMember ? (
-              <Box className={"hover-line"}>
-                <NavLink to="/orders" activeClassName={"underline"}>
-                  Orders
-                </NavLink>
-              </Box>
-            ) : null}
-            {authMember ? (
-              <Box className={"hover-line"}>
-                <NavLink to="/member-page" activeClassName={"underline"}>
-                  My Page
-                </NavLink>
-              </Box>
-            ) : null}
-            <Box className={"hover-line"}>
-              <NavLink to="/help" activeClassName={"underline"}>
-                Help
-              </NavLink>
-            </Box>
-            {/* BASKET */}
-            <Basket
-              cartItems={cartItems}
-              onAdd={onAdd}
-              onRemove={onRemove}
-              onDelete={onDelete}
-              onDeleteAll={onDeleteAll}
-            />
-            {!authMember ? (
-              <Box>
-                <Button
-                  variant="contained"
-                  className="login-button"
-                  onClick={() => setLoginOpen(true)}
-                >
-                  Login
-                </Button>
-              </Box>
-            ) : (
-              <img
-                alt="Profile-picture"
-                className="user-avatar"
-                src={
-                  authMember?.memberImage
-                    ? `${serverApi}/${authMember?.memberImage}`
-                    : "/icons/default-user.svg"
-                }
-                aria-haspopup={"true"}
-                onClick={handleLogoutClick}
+
+          {isMobile ? (
+            <>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ color: "#f8f8ff" }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Drawer
+                variant="temporary"
+                anchor="right"
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+                ModalProps={{
+                  keepMounted: true, // Better open performance on mobile
+                }}
+                sx={{
+                  "& .MuiDrawer-paper": {
+                    boxSizing: "border-box",
+                    width: 280,
+                    backgroundColor: "#343434",
+                    color: "#f8f8ff",
+                  },
+                }}
+              >
+                {drawer}
+              </Drawer>
+            </>
+          ) : (
+            <Stack className="links">
+              {navItems.map((item) => (
+                <Box key={item.label} className="hover-line">
+                  <NavLink to={item.path} activeClassName="underline">
+                    {item.label}
+                  </NavLink>
+                </Box>
+              ))}
+
+              <Basket
+                cartItems={cartItems}
+                onAdd={onAdd}
+                onRemove={onRemove}
+                onDelete={onDelete}
+                onDeleteAll={onDeleteAll}
               />
-            )}
-            <Menu
-              anchorEl={anchorEl}
-              id="account-menu"
-              open={Boolean(anchorEl)}
-              onClose={handleCloseLogut}
-              onClick={handleCloseLogut}
-              PaperProps={{
-                elevation: 0,
-                sx: {
-                  overflow: "visible",
-                  filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                  mt: 1.5,
-                  "& .MuiAvatar-root": {
-                    width: 32,
-                    height: 32,
-                    ml: -0.5,
-                    mr: 1,
+
+              {!authMember ? (
+                <Box>
+                  <Button
+                    variant="contained"
+                    className="login-button"
+                    onClick={() => setLoginOpen(true)}
+                  >
+                    Login
+                  </Button>
+                </Box>
+              ) : (
+                <img
+                  alt="Profile-picture"
+                  className="user-avatar"
+                  src={
+                    authMember?.memberImage
+                      ? `${serverApi}/${authMember?.memberImage}`
+                      : "/icons/default-user.svg"
+                  }
+                  aria-haspopup={"true"}
+                  onClick={handleLogoutClick}
+                />
+              )}
+
+              <Menu
+                anchorEl={anchorEl}
+                id="account-menu"
+                open={Boolean(anchorEl)}
+                onClose={handleCloseLogut}
+                onClick={handleCloseLogut}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: "visible",
+                    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                    mt: 1.5,
+                    "& .MuiAvatar-root": {
+                      width: 32,
+                      height: 32,
+                      ml: -0.5,
+                      mr: 1,
+                    },
+                    "&:before": {
+                      content: '""',
+                      display: "block",
+                      position: "absolute",
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: "background.paper",
+                      transform: "translateY(-50%) rotate(45deg)",
+                      zIndex: 0,
+                    },
                   },
-                  "&:before": {
-                    content: '""',
-                    display: "block",
-                    position: "absolute",
-                    top: 0,
-                    right: 14,
-                    width: 10,
-                    height: 10,
-                    bgcolor: "background.paper",
-                    transform: "translateY(-50%) rotate(45deg)",
-                    zIndex: 0,
-                  },
-                },
-              }}
-              transformOrigin={{ horizontal: "right", vertical: "top" }}
-              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-            >
-              <MenuItem onClick={handleLogoutRequest}>
-                <ListItemIcon>
-                  <Logout fontSize="small" style={{ color: "blue" }} />
-                </ListItemIcon>
-                Logout
-              </MenuItem>
-            </Menu>
-          </Stack>
+                }}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+              >
+                <MenuItem onClick={handleLogoutRequest}>
+                  <ListItemIcon>
+                    <Logout fontSize="small" style={{ color: "blue" }} />
+                  </ListItemIcon>
+                  Logout
+                </MenuItem>
+              </Menu>
+            </Stack>
+          )}
         </Stack>
+
         <Stack className={"header-frame"}>
           <Stack className={"detail"}>
             <Box className={"head-main-txt"}>

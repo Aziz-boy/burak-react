@@ -2,13 +2,30 @@
   width: 100%;
   height: auto;
 }
- 
+
 /** STATISTICS **/
 
 .homepage .static-frame {
   width: 100%;
   height: 236px;
   background: #343434;
+  position: relative;
+  overflow: hidden;
+}
+
+.homepage .static-frame::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(215, 182, 134, 0.1) 0%,
+    rgba(215, 182, 134, 0) 100%
+  );
+  z-index: 1;
 }
 
 .homepage .static-frame .info {
@@ -17,6 +34,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 2;
 }
 
 .homepage .static-frame .info .static-box {
@@ -25,6 +44,52 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.homepage .static-frame .info .static-box:hover {
+  transform: translateY(-5px);
+}
+
+@keyframes countUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+    filter: blur(10px);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes glowPulse {
+  0% {
+    text-shadow: 0 0 5px rgba(215, 182, 134, 0.2),
+      0 0 10px rgba(215, 182, 134, 0.2), 0 0 15px rgba(215, 182, 134, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(215, 182, 134, 0.4),
+      0 0 20px rgba(215, 182, 134, 0.4), 0 0 30px rgba(215, 182, 134, 0.4);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(215, 182, 134, 0.2),
+      0 0 10px rgba(215, 182, 134, 0.2), 0 0 15px rgba(215, 182, 134, 0.2);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  75% {
+    transform: translateX(2px) rotate(1deg);
+  }
 }
 
 .homepage .static-frame .info .static-box .static-num {
@@ -35,6 +100,11 @@
   font-weight: 600;
   line-height: 80px;
   color: #d7b686;
+  animation: countUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards,
+    glowPulse 2s ease-in-out infinite, shake 0.5s ease-in-out infinite;
+  animation-delay: 0s, 0.8s, 1.2s;
+  opacity: 0;
+  transform-origin: center center;
 }
 
 .homepage .static-frame .info .static-box .static-txt {
@@ -45,6 +115,193 @@
   font-weight: 500;
   line-height: 30px;
   color: #d7b586;
+  position: relative;
+  animation: countUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+.homepage .static-frame .info .static-box .static-txt::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: #d7b586;
+  transition: width 0.3s ease;
+}
+
+.homepage .static-frame .info .static-box:hover .static-txt::after {
+  width: 50%;
+}
+
+/* Add divider after Clients stat */
+.homepage .static-frame .info .static-box:last-child::after {
+  content: "";
+  position: absolute;
+  right: -7.5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 80%;
+  background: rgba(215, 182, 134, 0.6);
+  box-shadow: 0 0 4px rgba(215, 182, 134, 0.3);
+}
+
+@media screen and (max-width: 992px) {
+  .homepage .static-frame {
+    height: auto;
+    padding: 40px 0;
+  }
+
+  .homepage .static-frame .info {
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .homepage .static-frame .info .static-box {
+    width: 160px;
+    height: 100px;
+  }
+
+  .homepage .static-frame .info .static-box .static-num {
+    font-size: 42px;
+    line-height: 60px;
+  }
+
+  .homepage .static-frame .info .static-box .static-txt {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .homepage .static-frame {
+    padding: 15px 0;
+    height: auto;
+    position: relative;
+  }
+
+  .homepage .static-frame .info {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    padding: 10px 0;
+    width: 100%;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    position: relative;
+    margin: 0 -15px;
+    padding: 0 15px;
+  }
+
+  .homepage .static-frame .info::-webkit-scrollbar {
+    display: none;
+  }
+
+  .homepage .static-frame .info .static-box {
+    flex: 0 0 140px;
+    width: 140px;
+    height: auto;
+    padding: 12px;
+    background: rgba(215, 182, 134, 0.05);
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+    margin: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .homepage .static-frame .info .static-box .static-num {
+    font-size: 32px;
+    line-height: 40px;
+    animation: countUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards,
+      glowPulse 2s ease-in-out infinite, shake 0.5s ease-in-out infinite;
+    animation-delay: 0s, 0.8s, 1.2s;
+    opacity: 0;
+  }
+
+  .homepage .static-frame .info .static-box .static-txt {
+    font-size: 14px;
+    line-height: 18px;
+    animation: countUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
+  }
+
+  /* Hide all dividers in mobile view */
+  .homepage .static-frame .info .divider {
+    display: none;
+  }
+
+  /* Add mobile-only divider after Clients stat */
+  .homepage .static-frame .info .static-box:last-child {
+    position: relative;
+  }
+
+  .homepage .static-frame .info .static-box:last-child::after {
+    content: "";
+    position: absolute;
+    right: -7.5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 80%;
+    background: #e3c080;
+    box-shadow: 0 0 4px rgba(227, 192, 128, 0.4);
+  }
+
+  /* Scroll indicators */
+  .homepage .static-frame::before,
+  .homepage .static-frame::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .homepage .static-frame::before {
+    left: 0;
+    background: linear-gradient(to right, #343434 0%, rgba(52, 52, 52, 0) 100%);
+  }
+
+  .homepage .static-frame::after {
+    right: 0;
+    background: linear-gradient(to left, #343434 0%, rgba(52, 52, 52, 0) 100%);
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .homepage .static-frame {
+    padding: 10px 0;
+  }
+
+  .homepage .static-frame .info {
+    gap: 10px;
+  }
+
+  .homepage .static-frame .info .static-box {
+    flex: 0 0 120px;
+    width: 120px;
+    padding: 10px;
+  }
+
+  .homepage .static-frame .info .static-box .static-num {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .homepage .static-frame .info .static-box .static-txt {
+    font-size: 12px;
+    line-height: 16px;
+  }
 }
 
 /** POPULAR DISHES **/
@@ -151,8 +408,6 @@
   justify-content: center;
   gap: 20px; /* Adds spacing between cards */
   margin-top: 47px;
-
-  
 }
 
 .homepage .new-products-frame .card {
@@ -238,7 +493,6 @@
   text-align: center;
 }
 
-
 /** ADVERTISEMENT **/
 
 .homepage .ads-restaurant-frame {
@@ -306,8 +560,6 @@
   background-color: #fff;
   align-items: center;
 }
-
-
 
 .homepage .active-users-frame .product-detail .member-nickname {
   color: #000;
