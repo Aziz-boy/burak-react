@@ -3,9 +3,19 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import { Fab, Stack, TextField } from "@mui/material";
+import {
+  Box,
+  Stack,
+  TextField,
+  Typography,
+  IconButton,
+  InputAdornment,
+  TextFieldProps,
+} from "@mui/material";
 import styled from "styled-components";
 import LoginIcon from "@mui/icons-material/Login";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { T } from "../../../lib/types/common";
 import { Messages } from "../../../lib/config";
 import { LoginInput, MemberInput } from "../../../lib/types/member";
@@ -21,19 +31,71 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 2, 2),
+    borderRadius: "16px",
+    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
+    padding: theme.spacing(4),
+    position: "relative",
+    overflow: "hidden",
+    "&::before": {
+      content: '""',
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      height: "4px",
+      background: "linear-gradient(90deg, #1976d2 0%, #42a5f5 100%)",
+    },
   },
 }));
 
 const ModalImg = styled.img`
-  width: 62%;
+  width: 50%;
   height: 100%;
-  border-radius: 10px;
-  background: #000;
-  margin-top: 9px;
-  margin-left: 10px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+`;
+
+const StyledTextField = styled(TextField)<TextFieldProps>`
+  & .MuiOutlinedInput-root {
+    border-radius: 12px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    &.Mui-focused {
+      box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+    }
+  }
+`;
+
+const ActionButton = styled.button`
+  background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 24px;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 `;
 
 interface AuthenticationModalProps {
@@ -49,22 +111,19 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
   const [memberNick, setMemberNick] = useState<string>("");
   const [memberPhone, setMemberPhone] = useState<string>("");
   const [memberPassword, setMemberPassword] = useState<string>("");
+  const [showPassword, setShowPassword] = useState(false);
   const { setAuthMember } = useGlobals();
 
   /** HANDLERS **/
-
   const handleUsername = (e: T) => {
-    console.log(e.target.value);
     setMemberNick(e.target.value);
   };
 
   const handlePhone = (e: T) => {
-    console.log(e.target.value);
     setMemberPhone(e.target.value);
   };
 
   const handlePassword = (e: T) => {
-    console.log(e.target.value);
     setMemberPassword(e.target.value);
   };
 
@@ -140,41 +199,60 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
           <Stack
             className={classes.paper}
             direction={"row"}
-            sx={{ width: "800px" }}
+            sx={{ width: "800px", gap: 4 }}
           >
-            <ModalImg src={"/img/auth.webp"} alt="camera" />
-            <Stack sx={{ marginLeft: "69px", alignItems: "center" }}>
-              <h2>Signup Form</h2>
-              <TextField
-                sx={{ marginTop: "7px" }}
-                id="outlined-basic"
-                label="username"
+            <ModalImg src={"/img/auth.webp"} alt="authentication" />
+            <Stack
+              sx={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+            >
+              <Typography
+                variant="h4"
+                sx={{ mb: 3, fontWeight: 600, color: "#1a237e" }}
+              >
+                Create Account
+              </Typography>
+              <StyledTextField
+                fullWidth
+                label="Username"
                 variant="outlined"
                 onChange={handleUsername}
+                sx={{ mb: 2 }}
               />
-              <TextField
-                sx={{ my: "17px" }}
-                id="outlined-basic"
-                label="phone number"
+              <StyledTextField
+                fullWidth
+                label="Phone Number"
                 variant="outlined"
                 onChange={handlePhone}
+                sx={{ mb: 2 }}
               />
-              <TextField
-                id="outlined-basic"
-                label="password"
+              <StyledTextField
+                fullWidth
+                label="Password"
                 variant="outlined"
+                type={showPassword ? "text" : "password"}
                 onChange={handlePassword}
                 onKeyDown={handlePasswordKeyDown}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowPassword(!showPassword)}
+                        edge="end"
+                      >
+                        {showPassword ? (
+                          <VisibilityOffIcon />
+                        ) : (
+                          <VisibilityIcon />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
-              <Fab
-                sx={{ marginTop: "30px", width: "120px" }}
-                variant="extended"
-                color="primary"
-                onClick={handleSignupRequest}
-              >
-                <LoginIcon sx={{ mr: 1 }} />
-                Signup
-              </Fab>
+              <ActionButton onClick={handleSignupRequest}>
+                <LoginIcon />
+                Sign Up
+              </ActionButton>
             </Stack>
           </Stack>
         </Fade>
@@ -196,41 +274,53 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
           <Stack
             className={classes.paper}
             direction={"row"}
-            sx={{ width: "700px" }}
+            sx={{ width: "700px", gap: 4 }}
           >
-            <ModalImg src={"/img/auth.webp"} alt="camera" />
+            <ModalImg src={"/img/auth.webp"} alt="authentication" />
             <Stack
-              sx={{
-                marginLeft: "65px",
-                marginTop: "25px",
-                alignItems: "center",
-              }}
+              sx={{ flex: 1, alignItems: "center", justifyContent: "center" }}
             >
-              <h2>Login Form</h2>
-              <TextField
-                id="outlined-basic"
-                label="username"
+              <Typography
+                variant="h4"
+                sx={{ mb: 3, fontWeight: 600, color: "#1a237e" }}
+              >
+                Welcome Back
+              </Typography>
+              <StyledTextField
+                fullWidth
+                label="Username"
                 variant="outlined"
-                sx={{ my: "10px" }}
                 onChange={handleUsername}
+                sx={{ mb: 2 }}
               />
-              <TextField
-                id={"outlined-basic"}
-                label={"password"}
-                variant={"outlined"}
-                type={"password"}
+              <StyledTextField
+                fullWidth
+                label="Password"
+                variant="outlined"
+                type={showPassword ? "text" : "password"}
                 onChange={handlePassword}
                 onKeyDown={handlePasswordKeyDown}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowPassword(!showPassword)}
+                        edge="end"
+                      >
+                        {showPassword ? (
+                          <VisibilityOffIcon />
+                        ) : (
+                          <VisibilityIcon />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
-              <Fab
-                sx={{ marginTop: "27px", width: "120px" }}
-                variant={"extended"}
-                color={"primary"}
-                onClick={handleLoginRequest}
-              >
-                <LoginIcon sx={{ mr: 1 }} />
-                Login
-              </Fab>
+              <ActionButton onClick={handleLoginRequest}>
+                <LoginIcon />
+                Sign In
+              </ActionButton>
             </Stack>
           </Stack>
         </Fade>
