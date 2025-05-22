@@ -262,6 +262,12 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                 variant={"contained"}
                 className={"signup-button"}
                 onClick={() => setSignupOpen(true)}
+                sx={{
+                  position: "absolute",
+                  right: "20px",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                }}
               >
                 SIGN UP
               </Button>
